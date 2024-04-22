@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: sqltrainer
+      POSTGRES_PASSWORD: sqltrainer
+      POSTGRES_DB: sqltrainer
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data  # Persist PostgreSQL data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sqltrainer@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: sqltrainer
+    ports:
+      - "8080:80"
+    depends_on:
+      - postgres
+    volumes:
+     - ./servers.json:/pgadmin4/servers.json:z
