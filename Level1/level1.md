@@ -39,5 +39,8 @@ Table Customers
 11. Concatenate customer names and addresses into a single column.
 
 12. Display customer names and their registration dates formatted as 'YYYY-MM-DD'.
+<<<<<<< HEAD
 
 13. Retrieve the names and email addresses of customers who have not provided their email addresses (i.e., where the email field is NULL).
+=======
+>>>>>>> 849d708 (level1 definition)
