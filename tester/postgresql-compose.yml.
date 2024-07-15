@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: tester
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=tester
+    ports:
+      - "5432:5432" # Expose the PostgreSQL port to your host machine
+    volumes:
+      - ./product/product-init.sql:/docker-entrypoint-initdb.d/1-init.sql # Schema creation
+      - ./product/product-inject.sql:/docker-entrypoint-initdb.d/2-inject.sql # Data injection
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: my_pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: sqltrainer@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80" # Expose the pgAdmin port to your host machine
